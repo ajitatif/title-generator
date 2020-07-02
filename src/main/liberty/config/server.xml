@@ -1,0 +1,17 @@
+<server description="Title Generator Server">
+    <featureManager>
+        <feature>jaxrs-2.1</feature>
+        <feature>cdi-2.0</feature>
+        <feature>jdbc-4.3</feature>
+    </featureManager>
+
+    <library id="postgresJdbcDriver">
+        <fileset dir="${shared.resource.dir" includes="postgre*.jar" />
+<!--        javax.sql.ConnectionPoolDataSource-->
+    </library>
+
+    <datasource id="the-datasource" jndiName="jdbc/the-datasource" type="javax.sql.DataSource">
+        <jdbcDriver libraryRef="postgresJdbcDriver"/>
+        <properties URL="${data.jdbc.url}" user="${data.jdbc.user}" password="${data.jdbc.password}" />
+    </datasource>
+</server>
