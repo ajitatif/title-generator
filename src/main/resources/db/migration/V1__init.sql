@@ -14,9 +14,10 @@ create table title_values
     value      varchar(63)
 );
 
-create sequence ge_title_segment;
+create sequence ge_title_value;
 
 create table title_formats
+
 (
     id          bigint primary key,
     name varchar(255),
