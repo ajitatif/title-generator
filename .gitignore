@@ -3,5 +3,6 @@
 **/*.class
 **/*.jar
 !gradle/wrapper/gradle-wrapper.jar
+!src/**/*.jar
 build/
 .gradle/

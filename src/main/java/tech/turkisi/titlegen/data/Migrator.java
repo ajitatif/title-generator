@@ -2,19 +2,24 @@ package tech.turkisi.titlegen.data;
 
 import org.flywaydb.core.Flyway;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Singleton;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.sql.DataSource;
 import java.io.Serializable;
 
 @Singleton
-@ApplicationScoped
+@Startup
+@TransactionManagement(value = TransactionManagementType.BEAN)
 public class Migrator implements Serializable {
 
-    @Resource(lookup = "jdbc/the-datasource")
+    @Resource
     private DataSource dataSource;
 
+    @PostConstruct
     public void migrate() {
 
         final Flyway flyway = Flyway.configure().dataSource(dataSource).load();

@@ -9,7 +9,7 @@ import java.util.List;
 
 public abstract class BaseJpaRepository<T, ID> {
 
-    @PersistenceContext
+    @PersistenceContext(unitName = "jpa-unit")
     protected EntityManager entityManager;
 
     private Class<T> managedEntityClass;
