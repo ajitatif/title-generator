@@ -17,13 +17,6 @@ public class TitleResource {
     private TitleGenerator titleGenerator;
 
     @GET
-    @Path("hello")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getHelloTitle() {
-        return "Senior World Greeting Executive";
-    }
-
-    @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getRandomTitle() {
         return titleGenerator.getRandomTitle();

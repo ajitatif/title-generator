@@ -14,7 +14,7 @@ public class TitleFormatRepository extends BaseJpaRepository<TitleFormat, Long> 
     public TitleFormat findByName(String name) {
 
         return (TitleFormat) entityManager.createQuery(
-                "select titleFormat from TitleFormat where titleFormat.name = :name").setParameter("name", name)
+                "select titleFormat from TitleFormat titleFormat where titleFormat.name = :name").setParameter("name", name)
                 .getSingleResult();
     }
 }

@@ -5,17 +5,12 @@ import tech.turkisi.titlegen.data.TitleValueRepository;
 import tech.turkisi.titlegen.domain.TitleFormat;
 import tech.turkisi.titlegen.domain.TitleValue;
 
-import javax.ejb.Stateless;
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TitleGenerator {
-//    public String getRandomTitle() {
-//        return null;
-//    }
 
     @Inject
     private TitleValueRepository titleValueRepository;
@@ -32,7 +27,7 @@ public class TitleGenerator {
         if (format == null) {
             throw new NonExistingFormatException(formatName);
         }
-        return getRandomTitle(formatName);
+        return getRandomTitle(format.getFormat());
     }
 
     public String getRandomTitle(String format) {
@@ -41,7 +36,7 @@ public class TitleGenerator {
                 titleValueRepository.findAll().stream().collect(Collectors.groupingBy(value -> value.getSegment().getFormat()));
 
         StringBuilder stringBuilder = new StringBuilder();
-        final String[] segments = format.split("/s");
+        final String[] segments = format.split("\\s");
         for (String segment : segments) {
             final List<TitleValue> values = valuesBySegmentFormats.get(segment);
             if (values == null) {

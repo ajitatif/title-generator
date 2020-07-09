@@ -12,7 +12,7 @@ public abstract class BaseJpaRepository<T, ID> {
     @PersistenceContext(unitName = "jpa-unit")
     protected EntityManager entityManager;
 
-    private Class<T> managedEntityClass;
+    private final Class<T> managedEntityClass;
 
     protected BaseJpaRepository(Class<T> managedEntityClass) {
         this.managedEntityClass = managedEntityClass;
