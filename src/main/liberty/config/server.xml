@@ -4,39 +4,22 @@
         <feature>cdi-2.0</feature>
         <feature>jdbc-4.3</feature>
         <feature>jpa-2.2</feature>
-        <feature>jndi-1.0</feature>
         <feature>ejb-3.2</feature>
     </featureManager>
 
     <library id="postgresLib">
         <fileset dir="${server.config.dir}/libs" includes="postgresql-*.jar" />
-<!--        javax.sql.ConnectionPoolDataSource-->
     </library>
 
     <jdbcDriver id="postgresJdbcDriver" libraryRef="postgresLib"
                 javax.sql.XADataSource="org.postgresql.xa.PGXADataSource"
                 javax.sql.ConnectionPoolDataSource="org.postgresql.ds.PGConnectionPoolDataSource"/>
 
-<!--    <dataSource id="DefaultDataSource" jndiName="java:comp/DefaultDataSource" jdbcDriverRef="posgtgresJdbcDriver"-->
-<!--                type="javax.sql.ConnectionPoolDataSource"-->
-<!--                transactional="true">-->
-<!--        <properties serverName="localhost" portNumber="5444" databaseName="title_generator" user="postgres" password="postgres" />-->
-<!--&lt;!&ndash;-->
-<!--      <properties URL="${data.jdbc.url}" user="${data.jdbc.user}" password="${data.jdbc.password}" />&ndash;&gt;-->
-<!--    </dataSource>-->
-
-    <!-- Derby Library Configuration -->
-    <library id="derbyJDBCLib">
-        <fileset dir="${shared.resource.dir}" includes="derby*.jar"/>
-    </library>
-
-    <!-- Datasource Configuration -->
     <dataSource id="DefaultDataSource"
                 jndiName="jdbc/datasource"
                 jdbcDriverRef="postgresJdbcDriver"
                 transactional="true">
         <jdbcDriver libraryRef="postgresLib" />
-<!--        <properties serverName="localhost" portNumber="5444" databaseName="title_generator" user="postgres" password="postgres" />-->
         <properties URL="${data.jdbc.url}" user="${data.jdbc.user}" password="${data.jdbc.password}" />
     </dataSource>
 </server>

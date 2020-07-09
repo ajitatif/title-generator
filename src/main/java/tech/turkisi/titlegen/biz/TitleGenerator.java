@@ -6,6 +6,7 @@ import tech.turkisi.titlegen.domain.TitleFormat;
 import tech.turkisi.titlegen.domain.TitleValue;
 
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -23,8 +24,10 @@ public class TitleGenerator {
     }
 
     public String getRandomTitleByFormatName(String formatName) {
-        final TitleFormat format = titleFormatRepository.findByName(formatName);
-        if (format == null) {
+        final TitleFormat format;
+        try {
+            format = titleFormatRepository.findByName(formatName);
+        } catch (NoResultException e) {
             throw new NonExistingFormatException(formatName);
         }
         return getRandomTitle(format.getFormat());
